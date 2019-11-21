@@ -1,0 +1,43 @@
+pipeline {
+    environment {
+        registry = "vtenisheva/my_private"
+        registryCredential = 'dockerhub'
+        
+    }
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh 'python --version'
+                echo 'Testing...'
+            }
+        }
+        stage('Cloning Git') {
+            steps {
+                git 'https://github.com/adzumatokaku/student-exam2.git' 
+            }
+        }
+    
+        stage('Building image') {
+            steps{
+                script {
+                    docker.build registry + ":webapp$BUILD_NUMBER" 
+                }
+            }
+        }
+        stage('Deploy Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        sh 'docker push $registry:webapp$BUILD_NUMBER' 
+                    }
+                }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $registry:webapp$BUILD_NUMBER"
+            }
+        } 
+    }
+}
