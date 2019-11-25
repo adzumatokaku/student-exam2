@@ -1,0 +1,3 @@
+sudo docker run -d -p 8080:8080 -v /home/adzumatokaku/jenkins:/var/jenkins_home:z -h jenkins-master --name jenkins-master -t jenkins/jenkins
+sudo docker run -d --privileged -v /home/adzumatokaku/jenkins_agent:/opt/jenkins:z -e "JENKINS_SLAVE_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR5aNWT4TxP7kmUdwRHI3lgWvZoS1pI1JKk8j20jSsUlG20/6vDDMaFo4K2Szw69woZdXCbkrWvpyNsYr7YXV+mcyGRFEo2aNsnjIaFLUA+Kf1Sn+T1uCrlTJ6Q9ycdZdPHCGo1LEVUguP2nKObyA8BqKKrEefk7JB3gJ+ivQz+voKbdrYTiTpg7D7WniLtaOa2GSGVZJPGHYxxHrJlBVSszGw3CY79FKFSggIRLFTIIdhX4uUVgMC0UJnf6oNgOrxIZ6dgWlz4c8xxZ2y2jd6T5QZSwxgjpMdtHY0ywfmMWPax4Nmw2cpplVVUjgCus1a+JsA4iqGB8YPmjlaJxLN jenkins@jenkins-master" --name jenkins-agent -h 172.17.0.3 vtenisheva/my_private:jenkins-slave-DIND
+echo "jenkins started successfully"
