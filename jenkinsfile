@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh """
                     cd my-app                   
-                    python3 -m virtualenv virtualenv
+                    python3.5 -m virtualenv virtualenv
                     . virtualenv/bin/activate
                     pip install -e .
                     export FLASK_APP=js_example
